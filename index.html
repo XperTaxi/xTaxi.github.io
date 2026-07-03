@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
     <title>xTaxi | Premium North American Directory</title>
+    <!-- Imports the ultra-sleek, luxury tech font 'Montserrat' directly from Google -->
+    <link href="https://googleapis.com" rel="stylesheet">
     <style>
         :root {
             --primary: #f1c40f;      /* Vibrant Taxi Yellow */
@@ -13,11 +15,10 @@
             --text-main: #f8fafc;   /* Crisp White text */
             --text-muted: #94a3b8;  /* Soft Gray description text */
             --action-green: #10b981; /* Neon Pulse Emergency Green */
-            --action-hover: #059669;
         }
 
         body {
-            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Montserrat', sans-serif;
             margin: 0;
             padding: 0;
             background-color: var(--bg-dark);
@@ -47,23 +48,29 @@
             box-shadow: 0 0 15px var(--primary);
         }
 
+        /* Ultra-Slick Title Font Configurations */
         header h1 { 
             margin: 0; 
-            font-size: 42px; 
+            font-size: 46px; 
             font-weight: 800; 
-            letter-spacing: -1px;
-            background: linear-gradient(to right, #ffffff, var(--primary));
+            text-transform: uppercase;
+            letter-spacing: -1.5px;
+            background: linear-gradient(135deg, #ffffff 30%, #f39c12 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-shadow: 0px 4px 20px rgba(0, 0, 0, 0.4);
         }
         
         header p { 
             margin: 12px 0 0 0; 
-            font-size: 16px; 
+            font-size: 15px; 
+            font-weight: 500;
             color: var(--text-muted); 
-            max-width: 500px;
+            max-width: 540px;
             margin-left: auto;
             margin-right: auto;
+            letter-spacing: 0.5px;
+            line-height: 1.6;
         }
         
         /* Floating Glassmorphic Control Center */
@@ -89,9 +96,9 @@
         .filter-group label {
             color: var(--primary);
             font-weight: 700;
-            font-size: 12px;
+            font-size: 11px;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 2px;
             display: block;
             margin-bottom: 8px;
             text-shadow: 0 0 10px rgba(241, 196, 15, 0.2);
@@ -99,8 +106,9 @@
 
         /* Sleek Futuristic Dropdowns */
         .filter-group select {
+            font-family: 'Montserrat', sans-serif;
             padding: 14px 20px;
-            font-size: 15px;
+            font-size: 14px;
             border-radius: 10px;
             border: 1px solid rgba(255, 255, 255, 0.1);
             min-width: 260px;
@@ -116,11 +124,6 @@
         .filter-group select:hover:not(:disabled) {
             border-color: var(--primary);
             box-shadow: 0 0 10px rgba(241, 196, 15, 0.15);
-        }
-
-        .filter-group select:focus {
-            border-color: var(--primary);
-            box-sizing: border-box;
         }
 
         .filter-group select:disabled {
@@ -148,8 +151,15 @@
         .instruction-box h2 { 
             margin-top: 0; 
             color: #ffffff; 
-            font-size: 26px; 
+            font-size: 24px; 
             font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .instruction-box p {
+            line-height: 1.6;
+            color: var(--text-muted);
+            font-size: 15px;
         }
 
         .instruction-box .icon-wrap {
@@ -159,7 +169,7 @@
         }
 
         .city-results-header {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 800;
             margin-bottom: 25px;
             letter-spacing: -0.5px;
@@ -167,6 +177,7 @@
             display: none;
             border-left: 4px solid var(--primary);
             padding-left: 15px;
+            text-transform: uppercase;
         }
 
         /* Glassmorphic Taxi Dispatch Display Cards */
@@ -197,23 +208,26 @@
             font-weight: 700; 
             color: #ffffff; 
             margin-bottom: 6px; 
+            letter-spacing: -0.5px;
         }
         
         .taxi-info { 
             font-size: 14px; 
             color: var(--text-muted); 
-            line-height: 1.5;
+            line-height: 1.6;
+            font-weight: 500;
         }
 
         /* Premium Pulsing Dial Trigger Buttons */
         .call-btn {
-            background: linear-gradient(135deg, var(--action-green) 0%, #059669; 100%);
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, var(--action-green) 0%, #059669 100%);
             color: white;
             padding: 14px 28px;
             text-decoration: none;
             border-radius: 12px;
             font-weight: 700;
-            font-size: 15px;
+            font-size: 14px;
             white-space: nowrap;
             box-shadow: 0 8px 20px rgba(16, 185, 129, 0.25);
             transition: all 0.2s ease;
@@ -280,13 +294,3 @@
         <div id="welcomeBox" class="instruction-box">
             <div class="icon-wrap">🚕</div>
             <h2>Intelligent Transport Gateway</h2>
-            <p>Refine your operational territory filters using the menu configuration selectors to instantly retrieve responsive, quick-dial contact grids.</p>
-        </div>
-
-        <div id="resultsHeader" class="city-results-header"></div>
-        <div id="taxiList"></div>
-    </div>
-
-    <script src="database.js"></script>
-</body>
-</html>
