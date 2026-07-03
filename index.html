@@ -3,77 +3,231 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- This hidden tag prevents Google from showing your site to the public -->
+    <!-- Privacy Shield: Prevents Google indexing while you build -->
     <meta name="robots" content="noindex, nofollow">
-    <title>City Taxi Directory (In Development)</title>
+    <title>xTaxi | North American City Directory</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 20px;
-            background-color: #f4f4f9;
-            color: #333;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #212529;
         }
         header {
             text-align: center;
-            padding: 20px 0;
-            background-color: #f1c40f; /* Taxi Yellow */
+            padding: 30px 15px;
+            background-color: #f1c40f; /* Iconic Taxi Yellow */
             color: #000;
-            border-radius: 8px;
-            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
-        h1 { margin: 0; font-size: 28px; }
+        header h1 { margin: 0; font-size: 32px; font-weight: bold; }
+        header p { margin: 5px 0 0 0; font-size: 16px; opacity: 0.8; }
+        
+        .nav-container {
+            background-color: #2c3e50;
+            padding: 12px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .nav-label {
+            color: #f1c40f;
+            font-weight: bold;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin-right: 5px;
+        }
+        .nav-btn {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 8px;
+            font-weight: bold;
+            font-size: 15px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+        .nav-btn:hover { background-color: #34495e; }
+        .nav-divider { color: #5d6d7e; margin: 0 15px; }
+
         .container {
-            max-width: 600px;
-            margin: 0 auto;
+            max-width: 750px;
+            margin: 30px auto;
+            padding: 0 15px;
+        }
+        .country-heading {
+            font-size: 28px;
+            color: #2c3e50;
+            margin-top: 40px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .city-section {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            margin-bottom: 30px;
+            scroll-margin-top: 70px;
         }
         .city-title {
             font-size: 22px;
-            margin-bottom: 15px;
+            font-weight: bold;
             color: #2c3e50;
+            border-bottom: 2px solid #f1c40f;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
         }
         .taxi-card {
-            background: #fff;
+            background: #fdfefe;
             padding: 15px;
             margin-bottom: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-radius: 6px;
+            border-left: 4px solid #f1c40f;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
         }
-        .taxi-name {
-            font-size: 18px;
-            font-weight: bold;
-            color: #2c3e50;
-            margin-bottom: 5px;
-        }
-        .taxi-info {
-            font-size: 14px;
-            color: #7f8c8d;
-            margin-bottom: 10px;
-        }
+        .taxi-details { flex: 1; min-width: 200px; }
+        .taxi-name { font-size: 18px; font-weight: bold; color: #2c3e50; margin-bottom: 4px; }
+        .taxi-info { font-size: 14px; color: #7f8c8d; }
         .call-btn {
-            display: inline-block;
             background-color: #27ae60;
             color: white;
-            padding: 10px 15px;
+            padding: 12px 20px;
             text-decoration: none;
-            border-radius: 5px;
+            border-radius: 6px;
             font-weight: bold;
-            font-size: 14px;
+            font-size: 15px;
+            text-align: center;
+            white-space: nowrap;
+            display: inline-block;
+        }
+        .call-btn:hover { background-color: #219653; }
+
+        @media (max-width: 600px) {
+            .nav-container { display: flex; flex-direction: column; gap: 8px; }
+            .taxi-card { flex-direction: column; align-items: stretch; text-align: center; }
+            .call-btn { display: block; width: 100%; box-sizing: border-box; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>🚕 Local Taxi Directory (Under Construction)</h1>
+        <h1>🚕 xTaxi Directory</h1>
+        <p>Verified, quick-dial phone numbers for major cities across Canada & the United States.</p>
     </header>
 
+    <!-- Country & City Selection Menu -->
+    <div class="nav-container">
+        <span class="nav-label">🇨🇦 Canada:</span>
+        <a href="#toronto" class="nav-btn">Toronto</a>
+        <a href="#vancouver" class="nav-btn">Vancouver</a>
+        <a href="#montreal" class="nav-btn">Montreal</a>
+        
+        <span class="nav-divider">|</span>
+        
+        <span class="nav-label">🇺🇸 United States:</span>
+        <a href="#new-york" class="nav-btn">New York</a>
+        <a href="#los-angeles" class="nav-btn">Los Angeles</a>
+        <a href="#chicago" class="nav-btn">Chicago</a>
+    </div>
+
     <div class="container">
-        <div class="city-title">Development Preview</div>
-        <div class="taxi-card">
-            <div class="taxi-name">Website Setup Successful!</div>
-            <div class="taxi-info">Your layout is ready. Nobody can find this domain yet.</div>
+
+        <!-- ==================== CANADA SECTION ==================== -->
+        <div class="country-heading">🇨🇦 Canada</div>
+
+        <!-- TORONTO -->
+        <div id="toronto" class="city-section">
+            <div class="city-title">Toronto, ON</div>
+            
+            <div class="taxi-card">
+                <div class="taxi-details">
+                    <div class="taxi-name">Beck Taxi</div>
+                    <div class="taxi-info">Major Toronto dispatch fleet | 24/7 service</div>
+                </div>
+                <a href="tel:4167515555" class="call-btn">📞 Call (416) 751-5555</a>
+            </div>
         </div>
+
+        <!-- VANCOUVER -->
+        <div id="vancouver" class="city-section">
+            <div class="city-title">Vancouver, BC</div>
+            
+            <div class="taxi-card">
+                <div class="taxi-details">
+                    <div class="taxi-name">Vancouver Taxi Co.</div>
+                    <div class="taxi-info">Serving metro Vancouver and YVR Airport</div>
+                </div>
+                <a href="tel:6048711111" class="call-btn">📞 Call (604) 871-1111</a>
+            </div>
+        </div>
+
+        <!-- MONTREAL -->
+        <div id="montreal" class="city-section">
+            <div class="city-title">Montreal, QC</div>
+            
+            <div class="taxi-card">
+                <div class="taxi-details">
+                    <div class="taxi-name">Taxi Diamond</div>
+                    <div class="taxi-info">Largest dispatch network in Montreal region</div>
+                </div>
+                <a href="tel:5142736111" class="call-btn">📞 Call (514) 273-6111</a>
+            </div>
+        </div>
+
+
+        <!-- ==================== UNITED STATES SECTION ==================== -->
+        <div class="country-heading">🇺🇸 United States</div>
+
+        <!-- NEW YORK -->
+        <div id="new-york" class="city-section">
+            <div class="city-title">New York City, NY</div>
+            
+            <div class="taxi-card">
+                <div class="taxi-details">
+                    <div class="taxi-name">Carmel Car & Limo</div>
+                    <div class="taxi-info">Servicing all NYC Boroughs and local airports</div>
+                </div>
+                <a href="tel:12126666666" class="call-btn">📞 Call (212) 666-6666</a>
+            </div>
+        </div>
+
+        <!-- LOS ANGELES -->
+        <div id="los-angeles" class="city-section">
+            <div class="city-title">Los Angeles, CA</div>
+            
+            <div class="taxi-card">
+                <div class="taxi-details">
+                    <div class="taxi-name">LA City Cab</div>
+                    <div class="taxi-info">Authorized airport pickups and Greater LA area service</div>
+                </div>
+                <a href="tel:18882489222" class="call-btn">📞 Call (888) 248-9222</a>
+            </div>
+        </div>
+
+        <!-- CHICAGO -->
+        <div id="chicago" class="city-section">
+            <div class="city-title">Chicago, IL</div>
+            
+            <div class="taxi-card">
+                <div class="taxi-details">
+                    <div class="taxi-name">Flash Cab</div>
+                    <div class="taxi-info">Serving Chicago communities, O'Hare, and Midway</div>
+                </div>
+                <a href="tel:17735614444" class="call-btn">📞 Call (773) 561-4444</a>
+            </div>
+        </div>
+
     </div>
 
 </body>
