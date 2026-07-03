@@ -4,120 +4,263 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
-    <title>xTaxi | North American Interactive Directory</title>
+    <title>xTaxi | Premium North American Directory</title>
     <style>
+        :root {
+            --primary: #f1c40f;      /* Vibrant Taxi Yellow */
+            --bg-dark: #0f172a;     /* Deep Slate Navy Blue */
+            --card-dark: #1e293b;   /* Midnight Dashboard Card */
+            --text-main: #f8fafc;   /* Crisp White text */
+            --text-muted: #94a3b8;  /* Soft Gray description text */
+            --action-green: #10b981; /* Neon Pulse Emergency Green */
+            --action-hover: #059669;
+        }
+
         body {
-            font-family: 'Segoe UI', Arial, sans-serif;
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f6f8;
-            color: #2c3e50;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
         }
+
+        /* Fancy Gradient Header Banner */
         header {
             text-align: center;
-            padding: 40px 20px;
-            background-color: #f1c40f;
-            color: #000;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border-bottom: 2px solid rgba(241, 196, 15, 0.15);
+            position: relative;
         }
-        header h1 { margin: 0; font-size: 36px; font-weight: 800; }
-        header p { margin: 8px 0 0 0; font-size: 16px; opacity: 0.85; }
         
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 99px;
+            box-shadow: 0 0 15px var(--primary);
+        }
+
+        header h1 { 
+            margin: 0; 
+            font-size: 42px; 
+            font-weight: 800; 
+            letter-spacing: -1px;
+            background: linear-gradient(to right, #ffffff, var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        header p { 
+            margin: 12px 0 0 0; 
+            font-size: 16px; 
+            color: var(--text-muted); 
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Floating Glassmorphic Control Center */
         .filter-container {
-            background-color: #2c3e50;
-            padding: 20px;
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 24px;
             text-align: center;
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
         }
+
         .filter-group {
             display: inline-block;
-            margin: 5px 15px;
+            margin: 8px 20px;
+            text-align: left;
         }
+
         .filter-group label {
-            color: #f1c40f;
-            font-weight: bold;
-            margin-right: 8px;
-            font-size: 15px;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            display: block;
+            margin-bottom: 8px;
+            text-shadow: 0 0 10px rgba(241, 196, 15, 0.2);
         }
+
+        /* Sleek Futuristic Dropdowns */
         .filter-group select {
-            padding: 10px 15px;
+            padding: 14px 20px;
             font-size: 15px;
-            border-radius: 6px;
-            border: none;
-            min-width: 240px;
-            font-weight: 500;
-            color: #34495e;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            min-width: 260px;
+            font-weight: 600;
+            background-color: #0f172a;
+            color: var(--text-main);
             outline: none;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .filter-group select:hover:not(:disabled) {
+            border-color: var(--primary);
+            box-shadow: 0 0 10px rgba(241, 196, 15, 0.15);
+        }
+
+        .filter-group select:focus {
+            border-color: var(--primary);
+            box-sizing: border-box;
+        }
+
+        .filter-group select:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            background-color: #1e293b;
         }
 
         .container {
             max-width: 750px;
-            margin: 40px auto;
+            margin: 50px auto;
             padding: 0 20px;
         }
         
+        /* Modern UI Welcome Card */
         .instruction-box {
-            background: #fff;
-            padding: 30px;
-            border-radius: 8px;
+            background: var(--card-dark);
+            padding: 45px 30px;
+            border-radius: 16px;
             text-align: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            border-top: 4px solid #f1c40f;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
         }
-        .instruction-box h2 { margin-top: 0; color: #2c3e50; }
+
+        .instruction-box h2 { 
+            margin-top: 0; 
+            color: #ffffff; 
+            font-size: 26px; 
+            font-weight: 700;
+        }
+
+        .instruction-box .icon-wrap {
+            font-size: 50px;
+            margin-bottom: 15px;
+            animation: bounce 2s infinite;
+        }
 
         .city-results-header {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 20px;
-            border-bottom: 3px solid #f1c40f;
-            padding-bottom: 5px;
-            color: #2c3e50;
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 25px;
+            letter-spacing: -0.5px;
+            color: #ffffff;
             display: none;
+            border-left: 4px solid var(--primary);
+            padding-left: 15px;
         }
 
+        /* Glassmorphic Taxi Dispatch Display Cards */
         .taxi-card {
-            background: #fff;
-            padding: 20px;
-            margin-bottom: 15px;
-            border-radius: 8px;
-            border-left: 5px solid #27ae60;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            background: var(--card-dark);
+            padding: 24px;
+            margin-bottom: 20px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            transition: all 0.3s ease;
+            animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
-        .taxi-details { flex: 1; padding-right: 15px; }
-        .taxi-name { font-size: 19px; font-weight: bold; color: #2c3e50; margin-bottom: 5px; }
-        .taxi-info { font-size: 14px; color: #7f8c8d; }
+
+        .taxi-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(241, 196, 15, 0.3);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        }
+
+        .taxi-details { flex: 1; padding-right: 20px; }
+        
+        .taxi-name { 
+            font-size: 20px; 
+            font-weight: 700; 
+            color: #ffffff; 
+            margin-bottom: 6px; 
+        }
+        
+        .taxi-info { 
+            font-size: 14px; 
+            color: var(--text-muted); 
+            line-height: 1.5;
+        }
+
+        /* Premium Pulsing Dial Trigger Buttons */
         .call-btn {
-            background-color: #27ae60;
+            background: linear-gradient(135deg, var(--action-green) 0%, #059669; 100%);
             color: white;
-            padding: 12px 24px;
+            padding: 14px 28px;
             text-decoration: none;
-            border-radius: 6px;
-            font-weight: bold;
+            border-radius: 12px;
+            font-weight: 700;
             font-size: 15px;
             white-space: nowrap;
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.25);
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
-        .call-btn:hover { background-color: #219653; }
+
+        .call-btn:hover { 
+            background: linear-gradient(135deg, #34d399 0%, var(--action-green) 100%);
+            transform: scale(1.03);
+            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.4);
+        }
+
+        /* Micro-interactions & Keyframe Animations */
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* Perfect Mobile Formatting rules */
+        @media (max-width: 640px) {
+            .filter-group { display: block; margin: 12px 0; }
+            .filter-group select { width: 100%; }
+            .taxi-card { flex-direction: column; text-align: center; padding: 25px; }
+            .taxi-details { padding-right: 0; margin-bottom: 20px; }
+            .call-btn { width: 100%; justify-content: center; box-sizing: border-box; }
+        }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>🚕 xTaxi Directory</h1>
-        <p>Verified quick-dial dispatch lists covering Canada & the United States.</p>
+        <h1>xTaxi Directory</h1>
+        <p>A premium localized network directory providing rapid access to verified dispatch fleets across US & Canada.</p>
     </header>
 
     <div class="filter-container">
         <div class="filter-group">
-            <label for="regionSelect">Choose Country / State:</label>
+            <label for="regionSelect">Select Country Zone</label>
             <select id="regionSelect" onchange="updateCityDropdown()">
-                <option value="">-- Select Region --</option>
+                <option value="">-- Choose Region --</option>
                 <option value="can_east">🇨🇦 Eastern / Atlantic Canada</option>
                 <option value="can_west">🇨🇦 Western / Central Canada</option>
                 <option value="us_east">🇺🇸 Eastern United States</option>
@@ -126,7 +269,7 @@
         </div>
 
         <div class="filter-group">
-            <label for="citySelect">Choose City Hub:</label>
+            <label for="citySelect">Select Target Market</label>
             <select id="citySelect" onchange="renderTaxiList()" disabled>
                 <option value="">-- Choose Region First --</option>
             </select>
@@ -135,15 +278,15 @@
 
     <div class="container">
         <div id="welcomeBox" class="instruction-box">
-            <h2>Welcome to xTaxi</h2>
-            <p>Please select your local territory or country zone above to review verified dispatch networks.</p>
+            <div class="icon-wrap">🚕</div>
+            <h2>Intelligent Transport Gateway</h2>
+            <p>Refine your operational territory filters using the menu configuration selectors to instantly retrieve responsive, quick-dial contact grids.</p>
         </div>
 
         <div id="resultsHeader" class="city-results-header"></div>
         <div id="taxiList"></div>
     </div>
 
-    <!-- Links the structural layout directly to your separate engine data file -->
     <script src="database.js"></script>
 </body>
 </html>
