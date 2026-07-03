@@ -4,17 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
-    <title>xTaxi | Premium Interactive Map Grid</title>
+    <title>xTaxi | Premium North American Directory</title>
+    <!-- Imports the ultra-sleek, luxury tech font 'Montserrat' directly from Google -->
     <link href="https://googleapis.com" rel="stylesheet">
     <style>
         :root {
-            --primary: #f1c40f;
-            --bg-dark: #0f172a;
-            --card-dark: #1e293b;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --action-green: #10b981;
+            --primary: #f1c40f;      /* Vibrant Taxi Yellow */
+            --bg-dark: #0f172a;     /* Deep Slate Navy Blue */
+            --card-dark: #1e293b;   /* Midnight Dashboard Card */
+            --text-main: #f8fafc;   /* Crisp White text */
+            --text-muted: #94a3b8;  /* Soft Gray description text */
+            --action-green: #10b981; /* Neon Pulse Emergency Green */
         }
+
         body {
             font-family: 'Montserrat', sans-serif;
             margin: 0;
@@ -23,216 +25,272 @@
             color: var(--text-main);
             min-height: 100vh;
         }
+
+        /* Fancy Gradient Header Banner */
         header {
             text-align: center;
-            padding: 50px 20px 30px;
+            padding: 60px 20px;
             background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border-bottom: 2px solid rgba(241, 196, 15, 0.15);
+            position: relative;
         }
+        
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 99px;
+            box-shadow: 0 0 15px var(--primary);
+        }
+
+        /* Ultra-Slick Title Font Configurations */
         header h1 { 
             margin: 0; 
-            font-size: 42px; 
+            font-size: 46px; 
             font-weight: 800; 
             text-transform: uppercase;
             letter-spacing: -1.5px;
-            background: linear-gradient(135deg, #ffffff 30%, var(--primary) 100%);
+            background: linear-gradient(135deg, #ffffff 30%, #f39c12 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-shadow: 0px 4px 20px rgba(0, 0, 0, 0.4);
         }
-        header p { margin: 10px 0 0; font-size: 15px; color: var(--text-muted); }
-        .container { max-width: 900px; margin: 0 auto 50px; padding: 0 20px; }
-        .section-label {
-            font-size: 13px;
+        
+        header p { 
+            margin: 12px 0 0 0; 
+            font-size: 15px; 
+            font-weight: 500;
+            color: var(--text-muted); 
+            max-width: 540px;
+            margin-left: auto;
+            margin-right: auto;
+            letter-spacing: 0.5px;
+            line-height: 1.6;
+        }
+        
+        /* Floating Glassmorphic Control Center */
+        .filter-container {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 24px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        .filter-group {
+            display: inline-block;
+            margin: 8px 20px;
+            text-align: left;
+        }
+
+        .filter-group label {
+            color: var(--primary);
             font-weight: 700;
+            font-size: 11px;
             text-transform: uppercase;
             letter-spacing: 2px;
-            color: var(--primary);
-            margin: 35px 0 15px;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            padding-bottom: 8px;
+            display: block;
+            margin-bottom: 8px;
+            text-shadow: 0 0 10px rgba(241, 196, 15, 0.2);
         }
-        .city-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-        .city-card {
-            position: relative;
-            height: 140px;
-            border-radius: 14px;
-            overflow: hidden;
-            background-size: cover;
-            background-position: center;
+
+        /* Sleek Futuristic Dropdowns */
+        .filter-group select {
+            font-family: 'Montserrat', sans-serif;
+            padding: 14px 20px;
+            font-size: 14px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            min-width: 260px;
+            font-weight: 600;
+            background-color: #0f172a;
+            color: var(--text-main);
+            outline: none;
             cursor: pointer;
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
         }
-        .city-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(15, 23, 42, 0.9) 20%, rgba(15, 23, 42, 0.2) 80%);
-        }
-        .city-card:hover {
-            transform: translateY(-5px);
+
+        .filter-group select:hover:not(:disabled) {
             border-color: var(--primary);
-            box-shadow: 0 12px 25px rgba(241, 196, 15, 0.15);
+            box-shadow: 0 0 10px rgba(241, 196, 15, 0.15);
         }
-        .city-card-text { position: absolute; bottom: 15px; left: 15px; right: 15px; z-index: 2; }
-        .city-card-name { font-size: 16px; font-weight: 700; color: #ffffff; margin: 0; }
-        .city-card-sub { font-size: 11px; color: var(--text-muted); margin: 2px 0 0; text-transform: uppercase; }
-        .display-panel {
+
+        .filter-group select:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            background-color: #1e293b;
+        }
+
+        .container {
+            max-width: 750px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+        
+        /* Modern UI Welcome Card */
+        .instruction-box {
             background: var(--card-dark);
+            padding: 45px 30px;
             border-radius: 16px;
-            padding: 30px;
-            margin-top: 40px;
-            border: 1px solid rgba(255,255,255,0.03);
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
         }
-        .results-header-title {
-            font-size: 22px;
+
+        .instruction-box h2 { 
+            margin-top: 0; 
+            color: #ffffff; 
+            font-size: 24px; 
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .instruction-box p {
+            line-height: 1.6;
+            color: var(--text-muted);
+            font-size: 15px;
+        }
+
+        .instruction-box .icon-wrap {
+            font-size: 50px;
+            margin-bottom: 15px;
+            animation: bounce 2s infinite;
+        }
+
+        .city-results-header {
+            font-size: 20px;
             font-weight: 800;
             margin-bottom: 25px;
+            letter-spacing: -0.5px;
             color: #ffffff;
+            display: none;
             border-left: 4px solid var(--primary);
             padding-left: 15px;
+            text-transform: uppercase;
         }
+
+        /* Glassmorphic Taxi Dispatch Display Cards */
         .taxi-card {
-            background: #0f172a;
-            padding: 20px;
-            margin-bottom: 15px;
-            border-radius: 12px;
+            background: var(--card-dark);
+            padding: 24px;
+            margin-bottom: 20px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            transition: all 0.3s ease;
+            animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
+
+        .taxi-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(241, 196, 15, 0.3);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        }
+
         .taxi-details { flex: 1; padding-right: 20px; }
-        .taxi-name { font-size: 19px; font-weight: 700; color: #ffffff; margin-bottom: 5px; }
-        .taxi-info { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+        
+        .taxi-name { 
+            font-size: 20px; 
+            font-weight: 700; 
+            color: #ffffff; 
+            margin-bottom: 6px; 
+            letter-spacing: -0.5px;
+        }
+        
+        .taxi-info { 
+            font-size: 14px; 
+            color: var(--text-muted); 
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        /* Premium Pulsing Dial Trigger Buttons */
         .call-btn {
+            font-family: 'Montserrat', sans-serif;
             background: linear-gradient(135deg, var(--action-green) 0%, #059669 100%);
             color: white;
-            padding: 12px 24px;
+            padding: 14px 28px;
             text-decoration: none;
-            border-radius: 10px;
+            border-radius: 12px;
             font-weight: 700;
             font-size: 14px;
+            white-space: nowrap;
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.25);
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
-        @media (max-width: 600px) {
-            .taxi-card { flex-direction: column; text-align: center; }
-            .taxi-details { padding-right: 0; margin-bottom: 15px; }
-            .call-btn { width: 100%; text-align: center; }
+
+        .call-btn:hover { 
+            background: linear-gradient(135deg, #34d399 0%, var(--action-green) 100%);
+            transform: scale(1.03);
+            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.4);
+        }
+
+        /* Micro-interactions & Keyframe Animations */
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* Perfect Mobile Formatting rules */
+        @media (max-width: 640px) {
+            .filter-group { display: block; margin: 12px 0; }
+            .filter-group select { width: 100%; }
+            .taxi-card { flex-direction: column; text-align: center; padding: 25px; }
+            .taxi-details { padding-right: 0; margin-bottom: 20px; }
+            .call-btn { width: 100%; justify-content: center; box-sizing: border-box; }
         }
     </style>
 </head>
 <body>
+
     <header>
-        <h1>xTaxi Hubs</h1>
-        <p>Click on any metropolitan landscape grid below to immediately map local fleets.</p>
+        <h1>xTaxi Directory</h1>
+        <p>A premium localized network directory providing rapid access to verified dispatch fleets across US & Canada.</p>
     </header>
-    <div class="container">
-        <!-- CANADA CATEGORY PANEL -->
-        <div class="section-label">🇨🇦 Canada Territory Hubs</div>
-        <div class="city-grid">
-            <div class="city-card" style="background-image: url('https://unsplash.com')" onclick="triggerCity('can_west', 'Toronto, ON')">
-                <div class="city-card-text">
-                    <p class="city-card-name">Toronto</p>
-                    <p class="city-card-sub">Ontario (ON)</p>
-                </div>
-            </div>
-            <div class="city-card" style="background-image: url('https://unsplash.com')" onclick="triggerCity('can_east', 'Montreal, QC')">
-                <div class="city-card-text">
-                    <p class="city-card-name">Montreal</p>
-                    <p class="city-card-sub">Quebec (QC)</p>
-                </div>
-            </div>
-            <div class="city-card" style="background-image: url('https://unsplash.com')" onclick="triggerCity('can_west', 'Vancouver, BC')">
-                <div class="city-card-text">
-                    <p class="city-card-name">Vancouver</p>
-                    <p class="city-card-sub">British Columbia (BC)</p>
-                </div>
-            </div>
-            <div class="city-card" style="background-image: url('https://unsplash.com')" onclick="triggerCity('can_east', 'Moncton, NB')">
-                <div class="city-card-text">
-                    <p class="city-card-name">Moncton</p>
-                    <p class="city-card-sub">New Brunswick (NB)</p>
-                </div>
-            </div>
-            <div class="city-card" style="background-image: url('https://unsplash.com')" onclick="triggerCity('can_east', 'Halifax, NS')">
-                <div class="city-card-text">
-                    <p class="city-card-name">Halifax</p>
-                    <p class="city-card-sub">Nova Scotia (NS)</p>
-                </div>
-            </div>
+
+    <div class="filter-container">
+        <div class="filter-group">
+            <label for="regionSelect">Select Country Zone</label>
+            <select id="regionSelect" onchange="updateCityDropdown()">
+                <option value="">-- Choose Region --</option>
+                <option value="can_east">🇨🇦 Eastern / Atlantic Canada</option>
+                <option value="can_west">🇨🇦 Western / Central Canada</option>
+                <option value="us_east">🇺🇸 Eastern United States</option>
+                <option value="us_west">🇺🇸 Western United States</option>
+            </select>
         </div>
 
-        <!-- UNITED STATES CATEGORY PANEL -->
-        <div class="section-label">🇺🇸 United States Territory Hubs</div>
-        <div class="city-grid">
-            <div class="city-card" style="background-image: url('https://unsplash.com')" onclick="triggerCity('us_east', 'New York City, NY')">
-                <div class="city-card-text">
-                    <p class="city-card-name">New York City</p>
-                    <p class="city-card-sub">New York (NY)</p>
-                </div>
-            </div>
-            <div class="city-card" style="background-image: url('https://unsplash.com')" onclick="triggerCity('us_west', 'Los Angeles, CA')">
-                <div class="city-text">
-                    <p class="city-card-name">Los Angeles</p>
-                    <p class="city-card-sub">California (CA)</p>
-                </div>
-            </div>
-            <div class="city-card" style="background-image: url('https://unsplash.com')" onclick="triggerCity('us_east', 'Chicago, IL')">
-                <div class="city-card-text">
-                    <p class="city-card-name">Chicago</p>
-                    <p class="city-card-sub">Illinois (IL)</p>
-                </div>
-            </div>
-            <div class="city-card" style="background-image: url('https://unsplash.com')" onclick="triggerCity('us_west', 'Las Vegas, NV')">
-                <div class="city-card-text">
-                    <p class="city-card-name">Las Vegas</p>
-                    <p class="city-card-sub">Nevada (NV)</p>
-                </div>
-            </div>
-            <div class="city-card" style="background-image: url('https://unsplash.com')" onclick="triggerCity('us_east', 'Miami, FL')">
-                <div class="city-card-text">
-                    <p class="city-card-name">Miami</p>
-                    <p class="city-card-sub">Florida (FL)</p>
-                </div>
-            </div>
-        </div>
-
-        <div id="outputDisplayPanel" class="display-panel" style="display: none;">
-            <div id="panelHeaderTitle" class="results-header-title"></div>
-            <div id="taxiDisplayTargetList"></div>
+        <div class="filter-group">
+            <label for="citySelect">Select Target Market</label>
+            <select id="citySelect" onchange="renderTaxiList()" disabled>
+                <option value="">-- Choose Region First --</option>
+            </select>
         </div>
     </div>
 
-    <script src="database.js?v=4"></script>
-    <script>
-        function triggerCity(zoneId, cityKeyId) {
-            const displayPanel = document.getElementById("outputDisplayPanel");
-            const headerTitle = document.getElementById("panelHeaderTitle");
-            const listTarget = document.getElementById("taxiDisplayTargetList");
-            const fleetRecords = taxiDatabase[zoneId].cities[cityKeyId];
-            
-            headerTitle.textContent = `VERIFIED FLEETS IN ${cityKeyId.toUpperCase()}`;
-            
-            let panelContentRowsHTML = "";
-            fleetRecords.forEach(taxi => {
-                panelContentRowsHTML += `
-                    <div class="taxi-card">
-                        <div class="taxi-details">
-                            <div class="taxi-name">${taxi.name}</div>
-                            <div class="taxi-info">${taxi.info}</div>
-                        </div>
-                        <a href="tel:${taxi.link}" class="call-btn">📞 Call ${taxi.phone}</a>
-                    </div>
-                `;
-            });
-            listTarget.innerHTML = panelContentRowsHTML;
-            displayPanel.style.display = "block";
-            displayPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }
-    </script>
-</body>
-</html>
+    <div class="container">
+        <div id="welcomeBox" class="instruction-box">
+            <div class="icon-wrap">🚕</div>
+            <h2>Intelligent Transport Gateway</h2>
