@@ -9,7 +9,7 @@ const taxiDatabase = {
             "Gatineau, QC": [{ name: "Taxi Coop Gatineau", info: "Reliable provincial boundary transit", phone: "(819) 777-5611", link: "8197775611" }],
             "Sherbrooke, QC": [{ name: "Taxis Sherbrooke", info: "Serving Eastern Townships loops", phone: "(819) 562-3333", link: "8195623333" }],
             "Halifax, NS": [
-                { name: "Casino Taxi", info: "Advanced satellite-linked dispatch across HRM", phone: "(902) 429-6666", link: "9024296666" },
+                { name: "Casino Taxi", info: "Advanced satellite dispatch across HRM", phone: "(902) 429-6666", link: "9024296666" },
                 { name: "Yellow Cab Halifax", info: "Corporate and standard municipality route transits", phone: "(902) 420-0000", link: "9024200000" }
             ],
             "Sydney, NS": [{ name: "City Printer Cabs", info: "Industrial Cape Breton local transit loops", phone: "(902) 564-5555", link: "9025645555" }],
@@ -120,22 +120,14 @@ function renderTaxiList() {
     }
     
     welcomeBox.style.display = "none";
-    resultsHeader.textContent = `Active Fleets in ${city}`;
+    resultsHeader.textContent = "Active Fleets in " + city;
     resultsHeader.style.display = "block";
     
     const dataRecords = taxiDatabase[zone].cities[city];
     let outputHTML = "";
     
     dataRecords.forEach(taxi => {
-        outputHTML += `
-            <div class="taxi-card">
-                <div class="taxi-details">
-                    <div class="taxi-name">${taxi.name}</div>
-                    <div class="taxi-info">${taxi.info}</div>
-                </div>
-                <a href="tel:${taxi.link}" class="call-btn">📞 Call ${taxi.phone}</a>
-            </div>
-        `;
+        outputHTML += '<div class="taxi-card"><div class="taxi-details"><div class="taxi-name">' + taxi.name + '</div><div class="taxi-info">' + taxi.info + '</div></div><a href="tel:' + taxi.link + '" class="call-btn">📞 Call ' + taxi.phone + '</a></div>';
     });
     
     taxiList.innerHTML = outputHTML;
