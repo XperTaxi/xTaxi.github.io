@@ -5,18 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
     <title>xTaxi | Premium North American Directory</title>
-    <!-- Imports the ultra-sleek, luxury tech font 'Montserrat' directly from Google -->
     <link href="https://googleapis.com" rel="stylesheet">
     <style>
         :root {
-            --primary: #f1c40f;      /* Vibrant Taxi Yellow */
-            --bg-dark: #0f172a;     /* Deep Slate Navy Blue */
-            --card-dark: #1e293b;   /* Midnight Dashboard Card */
-            --text-main: #f8fafc;   /* Crisp White text */
-            --text-muted: #94a3b8;  /* Soft Gray description text */
-            --action-green: #10b981; /* Neon Pulse Emergency Green */
+            --primary: #f1c40f;
+            --bg-dark: #0f172a;
+            --card-dark: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --action-green: #10b981;
         }
-
         body {
             font-family: 'Montserrat', sans-serif;
             margin: 0;
@@ -25,30 +23,12 @@
             color: var(--text-main);
             min-height: 100vh;
         }
-
-        /* Fancy Gradient Header Banner */
         header {
             text-align: center;
             padding: 60px 20px;
             background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
             border-bottom: 2px solid rgba(241, 196, 15, 0.15);
-            position: relative;
         }
-        
-        header::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 150px;
-            height: 3px;
-            background: var(--primary);
-            border-radius: 99px;
-            box-shadow: 0 0 15px var(--primary);
-        }
-
-        /* Ultra-Slick Title Font Configurations */
         header h1 { 
             margin: 0; 
             font-size: 46px; 
@@ -58,41 +38,19 @@
             background: linear-gradient(135deg, #ffffff 30%, #f39c12 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0px 4px 20px rgba(0, 0, 0, 0.4);
         }
-        
-        header p { 
-            margin: 12px 0 0 0; 
-            font-size: 15px; 
-            font-weight: 500;
-            color: var(--text-muted); 
-            max-width: 540px;
-            margin-left: auto;
-            margin-right: auto;
-            letter-spacing: 0.5px;
-            line-height: 1.6;
-        }
-        
-        /* Floating Glassmorphic Control Center */
+        header p { margin: 12px 0 0; font-size: 15px; color: var(--text-muted); }
         .filter-container {
             background: rgba(30, 41, 59, 0.7);
             backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
             padding: 24px;
             text-align: center;
             position: sticky;
             top: 0;
             z-index: 100;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
         }
-
-        .filter-group {
-            display: inline-block;
-            margin: 8px 20px;
-            text-align: left;
-        }
-
+        .filter-group { display: inline-block; margin: 8px 20px; text-align: left; }
         .filter-group label {
             color: var(--primary);
             font-weight: 700;
@@ -101,10 +59,7 @@
             letter-spacing: 2px;
             display: block;
             margin-bottom: 8px;
-            text-shadow: 0 0 10px rgba(241, 196, 15, 0.2);
         }
-
-        /* Sleek Futuristic Dropdowns */
         .filter-group select {
             font-family: 'Montserrat', sans-serif;
             padding: 14px 20px;
@@ -116,109 +71,40 @@
             background-color: #0f172a;
             color: var(--text-main);
             outline: none;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
         }
-
-        .filter-group select:hover:not(:disabled) {
-            border-color: var(--primary);
-            box-shadow: 0 0 10px rgba(241, 196, 15, 0.15);
-        }
-
-        .filter-group select:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-            background-color: #1e293b;
-        }
-
-        .container {
-            max-width: 750px;
-            margin: 50px auto;
-            padding: 0 20px;
-        }
-        
-        /* Modern UI Welcome Card */
+        .filter-group select:disabled { opacity: 0.4; }
+        .container { max-width: 750px; margin: 50px auto; padding: 0 20px; }
         .instruction-box {
             background: var(--card-dark);
             padding: 45px 30px;
             border-radius: 16px;
             text-align: center;
             border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
         }
-
-        .instruction-box h2 { 
-            margin-top: 0; 
-            color: #ffffff; 
-            font-size: 24px; 
-            font-weight: 700;
-            letter-spacing: -0.5px;
-        }
-
-        .instruction-box p {
-            line-height: 1.6;
-            color: var(--text-muted);
-            font-size: 15px;
-        }
-
-        .instruction-box .icon-wrap {
-            font-size: 50px;
-            margin-bottom: 15px;
-            animation: bounce 2s infinite;
-        }
-
+        .instruction-box h2 { margin-top: 0; color: #ffffff; font-size: 24px; }
         .city-results-header {
             font-size: 20px;
             font-weight: 800;
             margin-bottom: 25px;
-            letter-spacing: -0.5px;
             color: #ffffff;
             display: none;
             border-left: 4px solid var(--primary);
             padding-left: 15px;
             text-transform: uppercase;
         }
-
-        /* Glassmorphic Taxi Dispatch Display Cards */
         .taxi-card {
             background: var(--card-dark);
             padding: 24px;
             margin-bottom: 20px;
             border-radius: 16px;
             border: 1px solid rgba(255, 255, 255, 0.03);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: all 0.3s ease;
-            animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
-
-        .taxi-card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(241, 196, 15, 0.3);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-        }
-
         .taxi-details { flex: 1; padding-right: 20px; }
-        
-        .taxi-name { 
-            font-size: 20px; 
-            font-weight: 700; 
-            color: #ffffff; 
-            margin-bottom: 6px; 
-            letter-spacing: -0.5px;
-        }
-        
-        .taxi-info { 
-            font-size: 14px; 
-            color: var(--text-muted); 
-            line-height: 1.6;
-            font-weight: 500;
-        }
-
-        /* Premium Pulsing Dial Trigger Buttons */
+        .taxi-name { font-size: 20px; font-weight: 700; color: #ffffff; margin-bottom: 6px; }
+        .taxi-info { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
         .call-btn {
             font-family: 'Montserrat', sans-serif;
             background: linear-gradient(135deg, var(--action-green) 0%, #059669 100%);
@@ -229,47 +115,21 @@
             font-weight: 700;
             font-size: 14px;
             white-space: nowrap;
-            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.25);
-            transition: all 0.2s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
         }
-
-        .call-btn:hover { 
-            background: linear-gradient(135deg, #34d399 0%, var(--action-green) 100%);
-            transform: scale(1.03);
-            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.4);
-        }
-
-        /* Micro-interactions & Keyframe Animations */
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-        }
-
-        /* Perfect Mobile Formatting rules */
         @media (max-width: 640px) {
             .filter-group { display: block; margin: 12px 0; }
             .filter-group select { width: 100%; }
-            .taxi-card { flex-direction: column; text-align: center; padding: 25px; }
+            .taxi-card { flex-direction: column; text-align: center; }
             .taxi-details { padding-right: 0; margin-bottom: 20px; }
-            .call-btn { width: 100%; justify-content: center; box-sizing: border-box; }
+            .call-btn { width: 100%; text-align: center; }
         }
     </style>
 </head>
 <body>
-
     <header>
         <h1>xTaxi Directory</h1>
         <p>A premium localized network directory providing rapid access to verified dispatch fleets across US & Canada.</p>
     </header>
-
     <div class="filter-container">
         <div class="filter-group">
             <label for="regionSelect">Select Country Zone</label>
@@ -281,7 +141,6 @@
                 <option value="us_west">🇺🇸 Western United States</option>
             </select>
         </div>
-
         <div class="filter-group">
             <label for="citySelect">Select Target Market</label>
             <select id="citySelect" onchange="renderTaxiList()" disabled>
@@ -289,8 +148,14 @@
             </select>
         </div>
     </div>
-
     <div class="container">
         <div id="welcomeBox" class="instruction-box">
-            <div class="icon-wrap">🚕</div>
             <h2>Intelligent Transport Gateway</h2>
+            <p>Refine your operational territory filters using the menu configuration selectors to instantly retrieve responsive, quick-dial contact grids.</p>
+        </div>
+        <div id="resultsHeader" class="city-results-header"></div>
+        <div id="taxiList"></div>
+    </div>
+    <script src="database.js?v=5"></script>
+</body>
+</html>
