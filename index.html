@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
-    <title>xTaxi | Interactive Directory</title>
+    <title>xTaxi | North American Interactive Directory</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f4f6f8;
@@ -18,9 +18,10 @@
             padding: 40px 20px;
             background-color: #f1c40f;
             color: #000;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
         }
-        header h1 { margin: 0; font-size: 36px; }
-        header p { margin: 8px 0 0 0; font-size: 16px; }
+        header h1 { margin: 0; font-size: 36px; font-weight: 800; }
+        header p { margin: 8px 0 0 0; font-size: 16px; opacity: 0.85; }
         
         .filter-container {
             background-color: #2c3e50;
@@ -29,6 +30,7 @@
             position: sticky;
             top: 0;
             z-index: 100;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
         .filter-group {
             display: inline-block;
@@ -38,16 +40,21 @@
             color: #f1c40f;
             font-weight: bold;
             margin-right: 8px;
+            font-size: 15px;
         }
         .filter-group select {
             padding: 10px 15px;
             font-size: 15px;
             border-radius: 6px;
-            min-width: 180px;
+            border: none;
+            min-width: 240px;
+            font-weight: 500;
+            color: #34495e;
+            outline: none;
         }
 
         .container {
-            max-width: 700px;
+            max-width: 750px;
             margin: 40px auto;
             padding: 0 20px;
         }
@@ -57,24 +64,19 @@
             padding: 30px;
             border-radius: 8px;
             text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
             border-top: 4px solid #f1c40f;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
+        .instruction-box h2 { margin-top: 0; color: #2c3e50; }
 
-        .city-section {
-            display: none;
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-        }
-
-        .city-title {
+        .city-results-header {
             font-size: 24px;
             font-weight: bold;
+            margin-bottom: 20px;
             border-bottom: 3px solid #f1c40f;
             padding-bottom: 5px;
-            margin-bottom: 20px;
+            color: #2c3e50;
+            display: none;
         }
 
         .taxi-card {
@@ -88,8 +90,8 @@
             justify-content: space-between;
             align-items: center;
         }
-        .taxi-details { flex: 1; }
-        .taxi-name { font-size: 19px; font-weight: bold; margin-bottom: 5px; }
+        .taxi-details { flex: 1; padding-right: 15px; }
+        .taxi-name { font-size: 19px; font-weight: bold; color: #2c3e50; margin-bottom: 5px; }
         .taxi-info { font-size: 14px; color: #7f8c8d; }
         .call-btn {
             background-color: #27ae60;
@@ -98,125 +100,50 @@
             text-decoration: none;
             border-radius: 6px;
             font-weight: bold;
+            font-size: 15px;
+            white-space: nowrap;
         }
+        .call-btn:hover { background-color: #219653; }
     </style>
 </head>
 <body>
 
     <header>
         <h1>🚕 xTaxi Directory</h1>
-        <p>Select your region below to instantly find verified local dispatch fleets.</p>
+        <p>Verified quick-dial dispatch lists covering Canada & the United States.</p>
     </header>
 
     <div class="filter-container">
         <div class="filter-group">
-            <label for="citySelect">Choose City:</label>
-            <select id="citySelect" onchange="showCityData()">
-                <option value="">-- Select City --</option>
-                <option value="toronto">Toronto, ON</option>
-                <option value="vancouver">Vancouver, BC</option>
-                <option value="newyork">New York City, NY</option>
-                <option value="losangeles">Los Angeles, CA</option>
-                <option value="chicago">Chicago, IL</option>
+            <label for="regionSelect">Choose Country / State:</label>
+            <select id="regionSelect" onchange="updateCityDropdown()">
+                <option value="">-- Select Region --</option>
+                <option value="can_east">🇨🇦 Eastern / Atlantic Canada</option>
+                <option value="can_west">🇨🇦 Western / Central Canada</option>
+                <option value="us_east">🇺🇸 Eastern United States</option>
+                <option value="us_west">🇺🇸 Western United States</option>
+            </select>
+        </div>
+
+        <div class="filter-group">
+            <label for="citySelect">Choose City Hub:</label>
+            <select id="citySelect" onchange="renderTaxiList()" disabled>
+                <option value="">-- Choose Region First --</option>
             </select>
         </div>
     </div>
 
     <div class="container">
-        <!-- Default text box when no city is selected -->
         <div id="welcomeBox" class="instruction-box">
             <h2>Welcome to xTaxi</h2>
-            <p>Please select a city from the menu above to see the local taxi providers.</p>
+            <p>Please select your local territory or country zone above to review verified dispatch networks.</p>
         </div>
 
-        <!-- TORONTO DATA -->
-        <div id="toronto" class="city-section">
-            <div class="city-title">Toronto, ON</div>
-            <div class="taxi-card">
-                <div class="taxi-details">
-                    <div class="taxi-name">Beck Taxi</div>
-                    <div class="taxi-info">Largest traditional dispatch fleet in Toronto | 24/7 service</div>
-                </div>
-                <a href="tel:4167515555" class="call-btn">📞 Call (416) 751-5555</a>
-            </div>
-            <div class="taxi-card">
-                <div class="taxi-details">
-                    <div class="taxi-name">Co-op Cabs</div>
-                    <div class="taxi-info">Iconic red and yellow fleets serving the GTA</div>
-                </div>
-                <a href="tel:4165042667" class="call-btn">📞 Call (416) 504-2667</a>
-            </div>
-        </div>
-
-        <!-- VANCOUVER DATA -->
-        <div id="vancouver" class="city-section">
-            <div class="city-title">Vancouver, BC</div>
-            <div class="taxi-card">
-                <div class="taxi-details">
-                    <div class="taxi-name">Vancouver Taxi Co.</div>
-                    <div class="taxi-info">Serving metro Vancouver and YVR Airport arrivals</div>
-                </div>
-                <a href="tel:6048711111" class="call-btn">📞 Call (604) 871-1111</a>
-            </div>
-        </div>
-
-        <!-- NEW YORK DATA -->
-        <div id="newyork" class="city-section">
-            <div class="city-title">New York City, NY</div>
-            <div class="taxi-card">
-                <div class="taxi-details">
-                    <div class="taxi-name">Carmel Car & Limo Service</div>
-                    <div class="taxi-info">Licensed TLC airport luxury pickups and standard fleet</div>
-                </div>
-                <a href="tel:2126666666" class="call-btn">📞 Call (212) 666-6666</a>
-            </div>
-        </div>
-
-        <!-- LOS ANGELES DATA -->
-        <div id="losangeles" class="city-section">
-            <div class="city-title">Los Angeles, CA</div>
-            <div class="taxi-card">
-                <div class="taxi-details">
-                    <div class="taxi-name">LA City Cab</div>
-                    <div class="taxi-info">Authorized City of Los Angeles airport providers</div>
-                </div>
-                <a href="tel:8882489222" class="call-btn">📞 Call (888) 248-9222</a>
-            </div>
-        </div>
-
-        <!-- CHICAGO DATA -->
-        <div id="chicago" class="city-section">
-            <div class="city-title">Chicago, IL</div>
-            <div class="taxi-card">
-                <div class="taxi-details">
-                    <div class="taxi-name">Flash Cab</div>
-                    <div class="taxi-info">Reliable local fleet servicing O'Hare & Midway transit loops</div>
-                </div>
-                <a href="tel:7735614444" class="call-btn">📞 Call (773) 561-4444</a>
-            </div>
-        </div>
+        <div id="resultsHeader" class="city-results-header"></div>
+        <div id="taxiList"></div>
     </div>
 
-    <script>
-        function showCityData() {
-            var selectedCity = document.getElementById("citySelect").value;
-            
-            // Hide everything first
-            document.getElementById("welcomeBox").style.display = "none";
-            document.getElementById("toronto").style.display = "none";
-            document.getElementById("vancouver").style.display = "none";
-            document.getElementById("newyork").style.display = "none";
-            document.getElementById("losangeles").style.display = "none";
-            document.getElementById("chicago").style.display = "none";
-
-            // If user cleared selection, show welcome box
-            if (selectedCity === "") {
-                document.getElementById("welcomeBox").style.display = "block";
-            } else {
-                // Show the specific city card list
-                document.getElementById(selectedCity).style.display = "block";
-            }
-        }
-    </script>
+    <!-- Links the structural layout directly to your separate engine data file -->
+    <script src="database.js"></script>
 </body>
 </html>
